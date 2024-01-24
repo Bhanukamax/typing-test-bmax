@@ -3,7 +3,7 @@ import text from "../1000-common.txt";
 import { useEffect, useState, useRef } from "react";
 
 export default function TypingTest() {
-    const [testWords, setTestWords] = useState<string[]>([]);
+  const [testWords, setTestWords] = useState<string[]>([]);
   const [pool, setPool] = useState<string[]>([]);
     const [userText, setUserText] = useState<string>("");
 
