@@ -1,18 +1,17 @@
 :root {
-    --monkey-error: #ca4754;
-    --monkey-error-bg: #ca4754;
-    --monkey-main: #e2b714;
-    --monkey-sub: #646669;
-    --monkey-bg: #323437;
-    --monkey-text: #d1d0c5;
+  --monkey-error: #ca4754;
+  --monkey-error-bg: #ca4754;
+  --monkey-main: #e2b714;
+  --monkey-sub: #646669;
+  --monkey-bg: #323437;
+  --monkey-text: #d1d0c5;
 
-    --default-error: #ca4754;
-    --default-error-bg: #eeaaaa;
-    --default-main: #e2b714;
-    --default-sub: #ffffff;
-    --default-bg: #444444;
-    --default-text: #2fffee;
-
+  --default-error: #ca4754;
+  --default-error-bg: #eeaaaa;
+  --default-main: #e2b714;
+  --default-sub: #ffffff;
+  --default-bg: #444444;
+  --default-text: #2fffee;
 }
 
 body {
@@ -22,29 +21,27 @@ body {
   box-sizing: border-box;
 }
 
-
-
 .letter {
-    position: relative;
+  position: relative;
 }
 
 .cursor {
-    position: relative;
+  position: relative;
 }
 
 .cursor::before {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 3px;
-    height: 100%;
-    background-color: var(--default-text);
-    animation: blink 1s linear infinite;
-    top: 0;
-    left: -2px;
+  content: "";
+  display: block;
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background-color: var(--default-text);
+  animation: blink 1s linear infinite;
+  top: 0;
+  left: -2px;
 }
 
 #user-input {
-    position: fixed;
-    top: -100px;
+  position: fixed;
+  top: -100px;
 }

@@ -1,19 +1,20 @@
 import TestDisplay from "./TestDisplay";
 import text from "../1000-common.txt";
-import {IoReloadCircle} from "react-icons/io5";
+import { IoReloadCircle } from "react-icons/io5";
 import { useEffect, useState, useRef } from "react";
 
 enum TestState {
   NOT_STARTED,
   IN_PROGRESS,
-  FINISHED
+  FINISHED,
 }
 
 function formatTime(time: number) {
   const minutes = Math.floor(time / 60000);
   const seconds = Math.floor((time % 60000) / 1000);
   const miliseconds = Math.floor((time % 1000) / 10);
-  const milisecondsWithLeadingZero = miliseconds < 10 ? `0${miliseconds}` : miliseconds;
+  const milisecondsWithLeadingZero =
+    miliseconds < 10 ? `0${miliseconds}` : miliseconds;
   return `${minutes}:${seconds}:${milisecondsWithLeadingZero}`;
 }
 
@@ -38,7 +39,9 @@ export default function TypingTest() {
     }, 0);
 
     console.log("wrongLetterCount", wrongLetterCount);
-    setWpm(Math.floor(((userText.length - wrongLetterCount)  / 5) / (testTime / 60000)));
+    setWpm(
+      Math.floor((userText.length - wrongLetterCount) / 5 / (testTime / 60000)),
+    );
   }
 
   // test start effect, start test on first keypress
@@ -50,29 +53,29 @@ export default function TypingTest() {
   }, [userText]);
 
   // set test time every milisecond
-    useEffect(() => {
-        if (testState === TestState.IN_PROGRESS) {
-        const interval = setInterval(() => {
-          setTestTime(Date.now() - startTime);
-        }, 1);
-        return () => clearInterval(interval);
-        }
-    }, [testState, startTime]);
+  useEffect(() => {
+    if (testState === TestState.IN_PROGRESS) {
+      const interval = setInterval(() => {
+        setTestTime(Date.now() - startTime);
+      }, 1);
+      return () => clearInterval(interval);
+    }
+  }, [testState, startTime]);
 
   useEffect(() => {
     fetch(text)
-      .then((response) => response.text()).then((text) => {
+      .then((response) => response.text())
+      .then((text) => {
         const pool = text.split("\n");
         setPool(pool);
       });
-
   }, []);
 
   function getRandomWeightedIndex(weights: number[]) {
     const totalWeight = weights.reduce((acc, cur) => acc + cur, 0);
     const randomNum = Math.random() * totalWeight;
     let weightSum = 0;
-    for (let i = 0; i < weights.length; i++){
+    for (let i = 0; i < weights.length; i++) {
       weightSum += weights[i];
       if (randomNum < weightSum) {
         return i;
@@ -82,16 +85,18 @@ export default function TypingTest() {
   }
 
   function getWeightedRandomSample(array: string[], size: number) {
-  const sample = [];
-  const weights = array.map((_, index) => index < 100 ? index + 1 + 100000 : index + 1); // Assigning weights based on position
+    const sample = [];
+    const weights = array.map((_, index) =>
+      index < 100 ? index + 1 + 100000 : index + 1,
+    ); // Assigning weights based on position
 
-  for (let i = 0; i < size; i++) {
-    const randomIndex = getRandomWeightedIndex(weights);
-    sample.push(array[randomIndex]);
+    for (let i = 0; i < size; i++) {
+      const randomIndex = getRandomWeightedIndex(weights);
+      sample.push(array[randomIndex]);
+    }
+
+    return sample;
   }
-
-  return sample;
-}
   function oldgetWeightedRandomSample(array: string[], size: number) {
     const sample = [];
     const weights = array.map((word) => word.length);
@@ -109,50 +114,68 @@ export default function TypingTest() {
   }, [pool]);
 
   // end test effect
-    useEffect(() => {
-        if (testState === TestState.IN_PROGRESS && userText === testWords.join(" ") || userText.length >= testWords.join(" ").length) {
-          setTestState(TestState.FINISHED);
-        }
-    }, [userText, testWords, testState]);
+  useEffect(() => {
+    if (
+      (testState === TestState.IN_PROGRESS &&
+        userText === testWords.join(" ")) ||
+      userText.length >= testWords.join(" ").length
+    ) {
+      setTestState(TestState.FINISHED);
+    }
+  }, [userText, testWords, testState]);
 
   // wpm effect
-    useEffect(() => {
-        if (testState === TestState.IN_PROGRESS) {
-            updateWpm();
-        }
-    }, [userText, testTime, testState]);
+  useEffect(() => {
+    if (testState === TestState.IN_PROGRESS) {
+      updateWpm();
+    }
+  }, [userText, testTime, testState]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const newTest = () => {
-    const testWords = getWeightedRandomSample(pool, testSize)
-      .map(word => word?.toLowerCase());
+    const testWords = getWeightedRandomSample(pool, testSize).map((word) =>
+      word?.toLowerCase(),
+    );
     setTestWords(testWords);
     setUserText("");
     inputRef.current?.focus();
     setTestState(TestState.NOT_STARTED);
     setTestTime(0);
-  }
+  };
 
   useEffect(() => {
-    newTest()
-  }, [])
+    newTest();
+  }, []);
 
   const handleOnBlur = () => {
     setTestState(TestState.FINISHED);
-      updateWpm();
-  }
+    updateWpm();
+  };
 
   return (
-      <div className="main">
-          <h1>Typing Test</h1>
-          <div className="stats">
-              <span>WPM: {wpm}</span>
-              <span>Time: {formatTime(testTime)}</span>
-          </div>
-        <TestDisplay test={testWords.join(" ")} userText={userText} onClick={() => inputRef.current?.focus()} />
-        <input id="user-input" ref={inputRef} type="text" value={userText} onChange={(e) => setUserText(e.target.value)}  onBlur={handleOnBlur} />
-          <button onClick={newTest} className="button">New Test &nbsp; <IoReloadCircle size={20} /> </button>
+    <div className="main">
+      <h1>Typing Test</h1>
+      <div className="stats">
+        <span>WPM: {wpm}</span>
+        <span>Time: {formatTime(testTime)}</span>
+      </div>
+      <TestDisplay
+        test={testWords.join(" ")}
+        userText={userText}
+        onClick={() => inputRef.current?.focus()}
+      />
+      <input
+        id="user-input"
+        ref={inputRef}
+        type="text"
+        value={userText}
+        onChange={(e) => setUserText(e.target.value)}
+        onBlur={handleOnBlur}
+      />
+      <button onClick={newTest} className="button">
+        New Test &nbsp; <IoReloadCircle size={20} />{" "}
+      </button>
     </div>
-  )
+  );
 }
