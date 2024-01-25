@@ -100,8 +100,9 @@ export default function TypingTest() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const newTest = () => {
-    const testWords = pool.slice(0, testSize);
-    setTestWords(getWeightedRandomSample(pool, testSize));
+    const testWords = getWeightedRandomSample(pool, testSize)
+      .map(word => word.toLowerCase());
+    setTestWords(testWords);
     setUserText("");
     inputRef.current?.focus();
     setTestState(TestState.NOT_STARTED);
