@@ -12,7 +12,8 @@ function formatTime(time: number) {
   const minutes = Math.floor(time / 60000);
   const seconds = Math.floor((time % 60000) / 1000);
   const miliseconds = Math.floor((time % 1000) / 10);
-  return `${minutes}:${seconds}:${miliseconds}`;
+  const milisecondsWithLeadingZero = miliseconds < 10 ? `0${miliseconds}` : miliseconds;
+  return `${minutes}:${seconds}:${milisecondsWithLeadingZero}`;
 }
 
 const TEST_SIZE = 10;
@@ -25,7 +26,7 @@ export default function TypingTest() {
   const [startTime, setStartTime] = useState<number>(0);
   const [testTime, setTestTime] = useState<number>(0);
   const [wpm, setWpm] = useState<number>(0);
-  const [testSize, setTestSize] = useState<number>(10);
+  const [testSize, setTestSize] = useState<number>(TEST_SIZE);
 
   function updateWpm() {
     setWpm(Math.floor((userText.length / 5) / (testTime / 60000)));
@@ -134,13 +135,12 @@ export default function TypingTest() {
   }
 
   return (
-    <div>
-        <h1>Typing Test</h1>
-        <p>Time: {formatTime(testTime)}</p>
-        <p>WPM equation (userText.length / 5) / (testTime / 60000) = {wpm}</p>
-        <p>usertext.length: {userText.length}</p>
-        <p>testTime in minuens: {Number(testTime / (60_000))}</p>
-        <p>WPM: {(userText.length / 5) / (testTime/60_000)} {wpm}</p>
+      <div className="main">
+          <h1>Typing Test</h1>
+          <div className="stats">
+        <span>Time: {formatTime(testTime)}</span>
+        <span>usertext.length: {userText.length}</span>
+        <span>WPM: {wpm}</span></div>
         <TestDisplay test={testWords.join(" ")} userText={userText} onClick={() => inputRef.current?.focus()} />
         <input id="user-input" ref={inputRef} type="text" value={userText} onChange={(e) => setUserText(e.target.value)}  onBlur={handleOnBlur} />
         <button onClick={newTest}>New Test</button>
