@@ -29,3 +29,10 @@ code {
 .stats > span {
     margin: 0 10px;
 }
+
+.button {
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+}

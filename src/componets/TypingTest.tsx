@@ -1,5 +1,6 @@
 import TestDisplay from "./TestDisplay";
 import text from "../1000-common.txt";
+import {IoReloadCircle} from "react-icons/io5";
 import { useEffect, useState, useRef } from "react";
 
 enum TestState {
@@ -146,12 +147,12 @@ export default function TypingTest() {
       <div className="main">
           <h1>Typing Test</h1>
           <div className="stats">
-        <span>Time: {formatTime(testTime)}</span>
-        <span>usertext.length: {userText.length}</span>
-        <span>WPM: {wpm}</span></div>
+              <span>WPM: {wpm}</span>
+              <span>Time: {formatTime(testTime)}</span>
+          </div>
         <TestDisplay test={testWords.join(" ")} userText={userText} onClick={() => inputRef.current?.focus()} />
         <input id="user-input" ref={inputRef} type="text" value={userText} onChange={(e) => setUserText(e.target.value)}  onBlur={handleOnBlur} />
-        <button onClick={newTest}>New Test</button>
+          <button onClick={newTest} className="button">New Test &nbsp; <IoReloadCircle size={20} /> </button>
     </div>
   )
 }
