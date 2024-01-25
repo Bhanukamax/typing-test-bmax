@@ -29,7 +29,15 @@ export default function TypingTest() {
   const [testSize, setTestSize] = useState<number>(TEST_SIZE);
 
   function updateWpm() {
-    setWpm(Math.floor((userText.length / 5) / (testTime / 60000)));
+    const wrongLetterCount = userText.split("").reduce((acc, cur, index) => {
+      if (cur !== testWords.join(" ")[index]) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+
+    console.log("wrongLetterCount", wrongLetterCount);
+    setWpm(Math.floor(((userText.length - wrongLetterCount)  / 5) / (testTime / 60000)));
   }
 
   // test start effect, start test on first keypress
@@ -101,7 +109,7 @@ export default function TypingTest() {
 
   // end test effect
     useEffect(() => {
-        if (testState === TestState.IN_PROGRESS && userText === testWords.join(" ")) {
+        if (testState === TestState.IN_PROGRESS && userText === testWords.join(" ") || userText.length >= testWords.join(" ").length) {
           setTestState(TestState.FINISHED);
         }
     }, [userText, testWords, testState]);
