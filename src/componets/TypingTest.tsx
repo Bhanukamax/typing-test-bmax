@@ -73,7 +73,11 @@ export default function TypingTest() {
                 const pool = text.split('\n')
                 setPool(pool)
             })
-    }, [])
+    }, [text])
+
+    useEffect(() => {
+        newTest()
+    }, [pool])
 
     function getRandomWeightedIndex(weights: number[]) {
         const totalWeight = weights.reduce((acc, cur) => acc + cur, 0)
@@ -101,21 +105,10 @@ export default function TypingTest() {
 
         return sample
     }
-    function oldgetWeightedRandomSample(array: string[], size: number) {
-        const sample = []
-        const weights = array.map((word) => word.length)
-        for (let i = 0; i < size; i++) {
-            const randomIndex = getRandomWeightedIndex(weights)
-            sample.push(array[randomIndex])
-        }
-        return sample
-    }
 
-    useEffect(() => {
-        const testWords = pool.slice(0, 10)
-        //        setTestWords(testWords);
-        setTestWords(getWeightedRandomSample(pool, testSize))
-    }, [pool])
+    //    useEffect(() => {
+    //        setTestWords(getWeightedRandomSample(pool, testSize))
+    //    }, [pool])
 
     // end test effect
     useEffect(() => {
