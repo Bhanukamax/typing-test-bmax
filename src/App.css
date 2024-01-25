@@ -1,23 +1,44 @@
+:root {
+    --monkey-error: #ca4754;
+    --monkey-error-bg: #ca4754;
+    --monkey-main: #e2b714;
+    --monkey-sub: #646669;
+    --monkey-bg: #323437;
+    --monkey-text: #d1d0c5;
+
+    --default-error: #ca4754;
+    --default-error-bg: #eeaaaa;
+    --default-main: #e2b714;
+    --default-sub: #ffffff;
+    --default-bg: #444444;
+    --default-text: #2fffee;
+
+}
+
 body {
-  background-color: #444444;
-  color: white;
+  background-color: var(--default-bg);
+  color: var(--default-sub);
   padding: 20px;
   box-sizing: border-box;
 }
 
+
+
 .letter {
     position: relative;
 }
+
 .cursor {
     position: relative;
 }
+
 .cursor::before {
     content: "";
     display: block;
     position: absolute;
     width: 3px;
     height: 100%;
-    background-color: blue;
+    background-color: var(--default-text);
     animation: blink 1s linear infinite;
     top: 0;
     left: -2px;
