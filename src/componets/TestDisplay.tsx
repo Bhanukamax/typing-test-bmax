@@ -12,7 +12,7 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
                     let correct = true;
                     if (index < userText.length) {
                       correct = letter !== userText[index]
-                      style = correct ? { color: '#ee4e44', textDecoration: 'italic', backgroundColor: "white"} : { color: '#2fffee' };
+                      style = correct ? { color: 'var(--default-error)', textDecoration: 'var(default-error-bg)', backgroundColor: "var(--default-error-bg)"} : { color: 'var(--default-text)' };
                     }
 
 
