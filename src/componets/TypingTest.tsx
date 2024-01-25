@@ -136,7 +136,6 @@ export default function TypingTest() {
   return (
     <div>
         <h1>Typing Test</h1>
-        <p>Test State: {testState}</p>
         <p>Time: {formatTime(testTime)}</p>
         <p>WPM equation (userText.length / 5) / (testTime / 60000) = {wpm}</p>
         <p>usertext.length: {userText.length}</p>
