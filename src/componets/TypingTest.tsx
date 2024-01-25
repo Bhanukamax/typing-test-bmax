@@ -2,6 +2,7 @@ import TestDisplay from './TestDisplay'
 import text from '../1000-common.txt'
 import { IoReloadCircle } from 'react-icons/io5'
 import { useEffect, useState, useRef } from 'react'
+import { setTheme, Themes } from '../util/theme'
 
 enum TestState {
     NOT_STARTED,
@@ -20,6 +21,7 @@ function formatTime(time: number) {
 
 const TEST_SIZE = 10
 
+setTheme(Themes.MONKEY)
 export default function TypingTest() {
     const [testState, setTestState] = useState<TestState>(TestState.NOT_STARTED)
     const [testWords, setTestWords] = useState<string[]>([])
@@ -153,7 +155,7 @@ export default function TypingTest() {
     return (
         <div className="main">
             <h1>Typing Test</h1>
-            <div className="stats">
+            <div className="stats color-main">
                 <span>WPM: {wpm}</span>
                 <span>Time: {formatTime(testTime)}</span>
             </div>
