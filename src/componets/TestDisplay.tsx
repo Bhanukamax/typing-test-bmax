@@ -3,6 +3,7 @@ interface Props {
     test: string
     onClick: () => void
 }
+
 export default function TestDisplay({ test, userText, onClick }: Props) {
     return (
         <div onClick={() => onClick()} className="text-display">

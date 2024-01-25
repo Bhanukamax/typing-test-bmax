@@ -3,6 +3,7 @@ import text from '../1000-common.txt'
 import { IoReloadCircle } from 'react-icons/io5'
 import { useEffect, useState, useRef } from 'react'
 import { setTheme, Themes } from '../util/theme'
+import { useFocusRefOnBodyClick } from '../hooks'
 
 enum TestState {
     NOT_STARTED,
@@ -22,6 +23,7 @@ function formatTime(time: number) {
 const TEST_SIZE = 10
 
 setTheme(Themes.MONKEY)
+
 export default function TypingTest() {
     const [testState, setTestState] = useState<TestState>(TestState.NOT_STARTED)
     const [testWords, setTestWords] = useState<string[]>([])
