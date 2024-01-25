@@ -27,6 +27,10 @@ export default function TypingTest() {
   const [wpm, setWpm] = useState<number>(0);
   const [testSize, setTestSize] = useState<number>(10);
 
+  function updateWpm() {
+    setWpm(Math.floor((userText.length / 5) / (testTime / 60000)));
+  }
+
   // test start effect, start test on first keypress
   useEffect(() => {
     if (testState === TestState.NOT_STARTED && userText.length > 0) {
@@ -58,7 +62,7 @@ export default function TypingTest() {
     const totalWeight = weights.reduce((acc, cur) => acc + cur, 0);
     const randomNum = Math.random() * totalWeight;
     let weightSum = 0;
-    for (let i = 0; i < weights.length; i++) {
+    for (let i = 0; i < weights.length; i++){
       weightSum += weights[i];
       if (randomNum < weightSum) {
         return i;
@@ -104,7 +108,7 @@ export default function TypingTest() {
   // wpm effect
     useEffect(() => {
         if (testState === TestState.IN_PROGRESS) {
-          setWpm(Math.floor((userText.length / 5) / (testTime / 60000)));
+            updateWpm();
         }
     }, [userText, testTime, testState]);
 
@@ -112,7 +116,7 @@ export default function TypingTest() {
 
   const newTest = () => {
     const testWords = getWeightedRandomSample(pool, testSize)
-      .map(word => word.toLowerCase());
+      .map(word => word?.toLowerCase());
     setTestWords(testWords);
     setUserText("");
     inputRef.current?.focus();
@@ -124,6 +128,11 @@ export default function TypingTest() {
     newTest()
   }, [])
 
+  const handleOnBlur = () => {
+    setTestState(TestState.FINISHED);
+      updateWpm();
+  }
+
   return (
     <div>
         <h1>Typing Test</h1>
@@ -133,10 +142,8 @@ export default function TypingTest() {
         <p>usertext.length: {userText.length}</p>
         <p>testTime in minuens: {Number(testTime / (60_000))}</p>
         <p>WPM: {(userText.length / 5) / (testTime/60_000)} {wpm}</p>
-
-
         <TestDisplay test={testWords.join(" ")} userText={userText} onClick={() => inputRef.current?.focus()} />
-        <input id="user-input" ref={inputRef} type="text" value={userText} onChange={(e) => setUserText(e.target.value)} />
+        <input id="user-input" ref={inputRef} type="text" value={userText} onChange={(e) => setUserText(e.target.value)}  onBlur={handleOnBlur} />
         <button onClick={newTest}>New Test</button>
     </div>
   )
