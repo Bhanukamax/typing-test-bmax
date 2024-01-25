@@ -6,7 +6,7 @@ interface Props {
 export default function TestDisplay({ test, userText, onClick }: Props) {
     return (
         <div onClick={() => onClick()} className="text-display">
-            <h2 className="display-text">
+            <h2>
                 {test.split('').map((letter: string, index: number) => {
                     let style
                     let correct = true

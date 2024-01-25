@@ -52,3 +52,14 @@ body {
 .text-display {
     min-height: 100px;
 }
+
+.button {
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--default-text);
+    background: var(--default-bg);
+    color: var(--default-text);
+    border-radius: 5px;
+}
