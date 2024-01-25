@@ -5,8 +5,8 @@ interface Props {
 }
 export default function TestDisplay({ test, userText, onClick }: Props) {
     return (
-        <div onClick={() => onClick()}>
-            <h2>
+        <div onClick={() => onClick()} className="text-display">
+            <h2 className="display-text">
                 {test.split('').map((letter: string, index: number) => {
                     let style
                     let correct = true
@@ -32,6 +32,7 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
                         </span>
                     )
                 })}
+                <span>&nbsp; &nbsp; &nbsp;</span>
             </h2>
 
             {/* <h3>{userText}</h3>

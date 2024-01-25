@@ -48,3 +48,7 @@ body {
 .color-main {
     color: var(--default-main);
 }
+
+.text-display {
+    min-height: 100px;
+}
