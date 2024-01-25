@@ -68,6 +68,17 @@ export default function TypingTest() {
   }
 
   function getWeightedRandomSample(array: string[], size: number) {
+  const sample = [];
+  const weights = array.map((_, index) => index < 100 ? index + 1 + 100000 : index + 1); // Assigning weights based on position
+
+  for (let i = 0; i < size; i++) {
+    const randomIndex = getRandomWeightedIndex(weights);
+    sample.push(array[randomIndex]);
+  }
+
+  return sample;
+}
+  function oldgetWeightedRandomSample(array: string[], size: number) {
     const sample = [];
     const weights = array.map((word) => word.length);
     for (let i = 0; i < size; i++) {
@@ -122,9 +133,11 @@ export default function TypingTest() {
         <p>usertext.length: {userText.length}</p>
         <p>testTime in minuens: {Number(testTime / (60_000))}</p>
         <p>WPM: {(userText.length / 5) / (testTime/60_000)} {wpm}</p>
+
+
+        <TestDisplay test={testWords.join(" ")} userText={userText} onClick={() => inputRef.current?.focus()} />
         <input id="user-input" ref={inputRef} type="text" value={userText} onChange={(e) => setUserText(e.target.value)} />
         <button onClick={newTest}>New Test</button>
-        <TestDisplay test={testWords.join(" ")} userText={userText} onClick={() => inputRef.current?.focus()} />
     </div>
   )
 }
