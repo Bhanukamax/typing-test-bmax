@@ -52,6 +52,26 @@
     color: var(--default-text);
 }
 
+
+.hover\:color-error:hover {
+    color: var(--default-error);
+}
+.hover\:color-error-bg:hover {
+    color: var(--default-error-bg);
+}
+.hover\:color-main:hover {
+    color: var(--default-main);
+}
+.hover\:color-sub:hover {
+    color: var(--default-sub);
+}
+.hover\:color-bg:hover {
+    color: var(--default-bg);
+}
+.hover\:color-text:hover {
+    color: var(--default-text);
+}
+
 .bg-error {
     background-color: var(--default-error);
 }
@@ -71,7 +91,29 @@
     background-color: var(--default-text);
 }
 
-body {
+
+.hover\:bg-error:hover {
+    background-color: var(--default-error);
+}
+.hover\:bg-error-bg:hover {
+    background-color: var(--default-error-bg);
+}
+.hover\:bg-main:hover {
+    background-color: var(--default-main);
+}
+.hover\:bg-sub:hover {
+    background-color: var(--default-sub);
+}
+.hover\:bg-bg:hover {
+    background-color: var(--default-bg);
+}
+.hover\:bg-text:hover {
+    background-color: var(--default-text);
+}
+
+.pointer {
+    cursor: pointer;
+}body {
     background-color: var(--default-bg);
     color: var(--default-sub);
     padding: 20px;
