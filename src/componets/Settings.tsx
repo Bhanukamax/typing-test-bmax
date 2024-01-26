@@ -8,8 +8,8 @@ type Props = {
 };
 
 export default function Settings({ onSave, settings }: Props) {
-  const [wordCount, setWordCount] = useState<number>(settings.wordCount);
-  const inputRef = useRef<HTMLInputElement>(null);
+    const [wordCount, setWordCount] = useState<number>(settings.wordCount);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleWordCountChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e?.target?.value;
@@ -23,9 +23,9 @@ export default function Settings({ onSave, settings }: Props) {
         onSave();
     };
 
-  const handleClick = () => {
-    inputRef.current?.select();
-  }
+    const handleClick = () => {
+        inputRef.current?.select();
+    };
     return (
         <div className="color-sub flex just">
             <form className="form" onSubmit={handleSubmit}>
@@ -35,7 +35,7 @@ export default function Settings({ onSave, settings }: Props) {
                     Word count:
                 </Label>
                 <input
-                  onClick={handleClick}
+                    onClick={handleClick}
                     ref={inputRef}
                     className="color-main bg-bg border-0 pl-2"
                     id="wordCount"

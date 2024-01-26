@@ -12,8 +12,8 @@ enum AppScreen {
     SETTINGS,
 }
 
-//const initialScreen = AppScreen.TEST;
-const initialScreen = AppScreen.SETTINGS;
+const initialScreen = AppScreen.TEST;
+//const initialScreen = AppScreen.SETTINGS;
 
 function App() {
     const [screen, setScreen] = useState(initialScreen);

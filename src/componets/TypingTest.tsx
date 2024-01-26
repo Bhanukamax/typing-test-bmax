@@ -24,7 +24,7 @@ function formatTime(time: number) {
 setTheme(Themes.MONKEY);
 
 type Props = {
-  wordCount: number;
+    wordCount: number;
 };
 
 export default function TypingTest({ wordCount }: Props) {
@@ -38,8 +38,7 @@ export default function TypingTest({ wordCount }: Props) {
     const [testTime, setTestTime] = useState<number>(0);
     const [wpm, setWpm] = useState<number>(0);
     const [testSize, setTestSize] = useState<number>(wordCount);
-    const [practiceQue, setPracticeQue] = useState<string[]>([
-    ]);
+    const [practiceQue, setPracticeQue] = useState<string[]>([]);
 
     function updateWpm() {
         const wrongLetterCount = userText
@@ -117,13 +116,17 @@ export default function TypingTest({ wordCount }: Props) {
         return sample;
     }
 
-  function addPracticeWordsToTest(testWords: string[], practiceQue: string[], take: number): string[] {
-    const practiceWords = practiceQue.slice(0, take);
-    const reducedTestWords = testWords.slice(practiceWords.length);
-    const newTestWords = [...practiceWords, ...reducedTestWords];
-    const shuffledWords = newTestWords.sort(() => Math.random() - 0.5);
-    return shuffledWords;
-  }
+    function addPracticeWordsToTest(
+        testWords: string[],
+        practiceQue: string[],
+        take: number
+    ): string[] {
+        const practiceWords = practiceQue.slice(0, take);
+        const reducedTestWords = testWords.slice(practiceWords.length);
+        const newTestWords = [...practiceWords, ...reducedTestWords];
+        const shuffledWords = newTestWords.sort(() => Math.random() - 0.5);
+        return shuffledWords;
+    }
 
     // end test effect
     useEffect(() => {
@@ -182,6 +185,7 @@ export default function TypingTest({ wordCount }: Props) {
             <input
                 id="user-input"
                 ref={inputRef}
+                disabled={testState === TestState.FINISHED}
                 type="text"
                 value={userText}
                 onChange={(e) => setUserText(e.target.value)}
