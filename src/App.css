@@ -14,6 +14,63 @@
     --default-text: #2fffee;
 }
 
+.color-error {
+    color: var(--default-error);
+}
+.color-error-bg {
+    color: var(--default-error-bg);
+}
+.color-main {
+    color: var(--default-main);
+}
+.color-sub {
+    color: var(--default-sub);
+}
+.color-bg {
+    color: var(--default-bg);
+}
+.color-text {
+    color: var(--default-text);
+}
+
+.color-error {
+    color: var(--default-error);
+}
+.color-error-bg {
+    color: var(--default-error-bg);
+}
+.color-main {
+    color: var(--default-main);
+}
+.color-sub {
+    color: var(--default-sub);
+}
+.color-bg {
+    color: var(--default-bg);
+}
+.color-text {
+    color: var(--default-text);
+}
+
+.bg-error {
+    background-color: var(--default-error);
+}
+.bg-error-bg {
+    background-color: var(--default-error-bg);
+}
+.bg-main {
+    background-color: var(--default-main);
+}
+.bg-sub {
+    background-color: var(--default-sub);
+}
+.bg-bg {
+    background-color: var(--default-bg);
+}
+.bg-text {
+    background-color: var(--default-text);
+}
+
 body {
     background-color: var(--default-bg);
     color: var(--default-sub);
@@ -63,4 +120,25 @@ body {
     background: var(--default-bg);
     color: var(--default-text);
     border-radius: 5px;
+}
+
+.header-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.border-0 {
+    border: 0;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bg-none {
+    background: none;
 }

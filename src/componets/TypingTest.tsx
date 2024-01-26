@@ -1,6 +1,6 @@
 import TestDisplay from './TestDisplay';
 import text from '../1000-common.txt';
-import { IoReloadCircle } from 'react-icons/io5';
+import { IoReloadCircle, IoCog } from 'react-icons/io5';
 import { useEffect, useState, useRef } from 'react';
 import { setTheme, Themes } from '../util/theme';
 import { useFocusRefOnBodyClick } from '../hooks';
@@ -160,7 +160,12 @@ export default function TypingTest() {
 
     return (
         <div className="main">
-            <h1>Typing Test</h1>
+            <div className="header-line">
+                <h1>Typing Test</h1>
+                <button className="border-0 flex bg-none color-sub">
+                    <IoCog size="20" />
+                </button>
+            </div>
             <div className="stats color-main">
                 <span>WPM: {wpm}</span>
                 <span>Time: {formatTime(testTime)}</span>
