@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     --monkey-error: #ca4754;
     --monkey-error-bg: #ca4754;

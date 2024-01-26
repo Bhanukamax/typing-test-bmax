@@ -4,6 +4,7 @@ import { IoReloadCircle, IoCog } from 'react-icons/io5';
 import { useEffect, useState, useRef } from 'react';
 import { setTheme, Themes } from '../util/theme';
 import { useFocusRefOnBodyClick } from '../hooks';
+import { Button } from 'flowbite-react';
 
 enum TestState {
     NOT_STARTED,
@@ -160,7 +161,7 @@ export default function TypingTest({ wordCount }: Props ) {
 
     return (
         <>
-            <div className="stats color-main">
+            <div className="stats color-main text-xl">
                 <span>WPM: {wpm}</span>
                 <span>Time: {formatTime(testTime)}</span>
             </div>
