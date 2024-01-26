@@ -1,10 +1,13 @@
 import { Label, RangeSlider, TextInput } from 'flowbite-react';
 import { ChangeEvent, useState } from 'react';
-import { loadSettings, updateSetting } from '../util/settings';
+import { updateSetting, type SettingsType } from '../util/settings';
 
+type Props = {
+  onSave: () => void;
+  settings: SettingsType;
+};
 
-const settings = loadSettings();
-export default function Settings() {
+export default function Settings({ onSave, settings }: Props) {
     const [wordCount, setWordCount] = useState<number>(settings.wordCount);
 
     const handleWordCountChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -14,6 +17,7 @@ export default function Settings() {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         updateSetting('wordCount', wordCount);
+        onSave();
     };
 
     return (
