@@ -149,7 +149,8 @@
 }
 
 .text-display {
-    width: 100%;
+    width: 700px;
+    max-width: 100%;
     text-align: center;
 }
 
