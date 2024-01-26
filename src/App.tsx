@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoCog } from 'react-icons/io5';
 import './App.css';
 import Settings from './componets/Settings';
@@ -12,12 +12,22 @@ enum AppScreen {
     SETTINGS,
 }
 
-//const initialScreen = AppScreen.TEST;
-const initialScreen = AppScreen.SETTINGS;
-const settings = loadSettings();
+const initialScreen = AppScreen.TEST;
+//const initialScreen = AppScreen.SETTINGS;
 
 function App() {
     const [screen, setScreen] = useState(initialScreen);
+    const [settings, setSettings] = useState(loadSettings());
+    useEffect(() => {
+        const settings = loadSettings();
+        setSettings(settings);
+    }, []);
+
+    const onSave = () => {
+        const settings = loadSettings();
+        setSettings(settings);
+        setScreen(AppScreen.TEST);
+    };
 
     return (
         <div className="App">
@@ -40,9 +50,15 @@ function App() {
                 {(() => {
                     switch (screen) {
                         case AppScreen.TEST:
-                            return <TypingTest wordCount={settings.wordCount || 10} />;
+                            return (
+                                <TypingTest
+                                    wordCount={settings.wordCount || 10}
+                                />
+                            );
                         case AppScreen.SETTINGS:
-                            return <Settings />
+                            return (
+                                <Settings onSave={onSave} settings={settings} />
+                            );
                     }
                 })()}
             </div>
