@@ -112,10 +112,6 @@ export default function TypingTest() {
         return sample;
     }
 
-    //    useEffect(() => {
-    //        setTestWords(getWeightedRandomSample(pool, testSize))
-    //    }, [pool])
-
     // end test effect
     useEffect(() => {
         if (
@@ -159,13 +155,7 @@ export default function TypingTest() {
     };
 
     return (
-        <div className="main">
-            <div className="header-line">
-                <h1>Typing Test</h1>
-                <button className="border-0 flex bg-none color-sub hover:color-main pointer">
-                    <IoCog size="20" />
-                </button>
-            </div>
+        <>
             <div className="stats color-main">
                 <span>WPM: {wpm}</span>
                 <span>Time: {formatTime(testTime)}</span>
@@ -186,6 +176,6 @@ export default function TypingTest() {
             <button onClick={newTest} className="button">
                 New Test &nbsp; <IoReloadCircle size={20} />{' '}
             </button>
-        </div>
+        </>
     );
 }
