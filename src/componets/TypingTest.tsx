@@ -20,11 +20,15 @@ function formatTime(time: number) {
     return `${minutes}:${seconds}:${milisecondsWithLeadingZero}`;
 }
 
-const TEST_SIZE = 10;
+
 
 setTheme(Themes.MONKEY);
 
-export default function TypingTest() {
+type Props = {
+    wordCount: number;
+};
+
+export default function TypingTest({ wordCount }: Props ) {
     const [testState, setTestState] = useState<TestState>(
         TestState.NOT_STARTED
     );
@@ -34,7 +38,7 @@ export default function TypingTest() {
     const [startTime, setStartTime] = useState<number>(0);
     const [testTime, setTestTime] = useState<number>(0);
     const [wpm, setWpm] = useState<number>(0);
-    const [testSize, setTestSize] = useState<number>(TEST_SIZE);
+    const [testSize, setTestSize] = useState<number>(wordCount);
 
     function updateWpm() {
         const wrongLetterCount = userText
