@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IoCog } from 'react-icons/io5';
+import { IoCog, IoArrowBack } from 'react-icons/io5';
 import './App.css';
 import Settings from './componets/Settings';
 import TypingTest from './componets/TypingTest';
@@ -32,19 +32,24 @@ function App() {
     return (
         <div className="App">
             <div className="main">
-                <div className="header-line">
+                <div className="header-line flex flex-col">
                     <h1 className="text-4xl font-bold">Typing Test</h1>
-                    <button className="border-0 flex bg-none color-sub hover:color-main pointer">
-                        <IoCog
-                            size="20"
-                            onClick={() =>
-                                setScreen(
-                                    screen === AppScreen.TEST
-                                        ? AppScreen.SETTINGS
-                                        : AppScreen.TEST
-                                )
-                            }
-                        />
+                    <button
+                        className="border-0 flex bg-none color-sub hover:color-main pointer item-center"
+                        onClick={() =>
+                            setScreen(
+                                screen === AppScreen.TEST
+                                    ? AppScreen.SETTINGS
+                                    : AppScreen.TEST
+                            )
+                        }
+                    >
+                        {screen === AppScreen.SETTINGS ? (
+                            <IoArrowBack size="25" className="mr-1" />
+                        ) : (
+                            <IoCog size="25" className="mr-1" />
+                        )}
+                        {screen === AppScreen.SETTINGS ? 'go back' : 'settings'}
                     </button>
                 </div>
                 {(() => {
