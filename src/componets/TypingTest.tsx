@@ -191,7 +191,7 @@ export default function TypingTest({ wordCount }: Props) {
                 onChange={(e) => setUserText(e.target.value)}
                 onBlur={handleOnBlur}
             />
-            <button onClick={newTest} className="button">
+            <button onClick={newTest} className="button rounded-full">
                 New Test &nbsp; <IoReloadCircle size={20} />{' '}
             </button>
         </>
