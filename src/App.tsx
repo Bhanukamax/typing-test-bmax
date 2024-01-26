@@ -17,7 +17,7 @@ function App() {
         <div className="App">
             <div className="main">
                 <div className="header-line">
-                    <h1>Typing Test</h1>
+                    <h1 className="text-4xl font-bold">Typing Test</h1>
                     <button className="border-0 flex bg-none color-sub hover:color-main pointer">
                         <IoCog
                             size="20"
