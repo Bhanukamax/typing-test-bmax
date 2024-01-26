@@ -3,6 +3,8 @@ import { IoCog } from 'react-icons/io5';
 import './App.css';
 import Settings from './componets/Settings';
 import TypingTest from './componets/TypingTest';
+import { loadSettings } from './util/settings';
+
 const TEST_SIZE = 10;
 
 enum AppScreen {
@@ -10,8 +12,12 @@ enum AppScreen {
     SETTINGS,
 }
 
+//const initialScreen = AppScreen.TEST;
+const initialScreen = AppScreen.SETTINGS;
+const settings = loadSettings();
+
 function App() {
-    const [screen, setScreen] = useState(AppScreen.TEST);
+    const [screen, setScreen] = useState(initialScreen);
 
     return (
         <div className="App">
@@ -34,9 +40,9 @@ function App() {
                 {(() => {
                     switch (screen) {
                         case AppScreen.TEST:
-                            return <TypingTest wordCount={10} />;
+                            return <TypingTest wordCount={settings.wordCount || 10} />;
                         case AppScreen.SETTINGS:
-                            return <Settings />;
+                            return <Settings />
                     }
                 })()}
             </div>
