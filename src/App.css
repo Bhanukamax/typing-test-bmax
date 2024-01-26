@@ -166,7 +166,7 @@
     border: 1px solid var(--default-text);
     background: var(--default-bg);
     color: var(--default-text);
-    border-radius: 5px;
+
 }
 
 .header-line {
@@ -180,11 +180,6 @@
     border: 0;
 }
 
-.flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .bg-none {
     background: none;
