@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IoCog, IoArrowBack } from 'react-icons/io5';
-import './App.css';
+import './App.scss';
 import Settings from './componets/Settings';
 import TypingTest from './componets/TypingTest';
 import { loadSettings } from './util/settings';

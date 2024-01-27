@@ -45,6 +45,7 @@ export default function Settings({ onSave, settings }: Props) {
                     onChange={handleWordCountChange}
                 />
                 <RangeSlider
+                  className="word-count-slider"
                     id="wordCount"
                     min={1}
                     max={50}
