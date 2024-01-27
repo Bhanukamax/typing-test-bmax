@@ -29,7 +29,7 @@ export default function Settings({ onSave, settings }: Props) {
     return (
         <div className="color-sub flex just">
             <form className="form" onSubmit={handleSubmit}>
-                <h2 className="text-xl">Settings</h2>
+                <h2 className="text-xl text-center">Settings</h2>
 
                 <Label htmlFor="wordCount" className="color-text">
                     Word count:
