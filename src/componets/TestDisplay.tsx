@@ -20,7 +20,7 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
             if (cursor) {
                 // set position of the cursor
                 cursor.style.top = `${top}px`;
-                let cursorLeft = left;
+                let cursorLeft = left - 2;
                 if (userText.length === test.length) {
                     cursorLeft = left + width;
                 }
