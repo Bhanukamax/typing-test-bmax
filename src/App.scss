@@ -56,7 +56,6 @@
     color: var(--default-text);
 }
 
-
 .hover\:color-error:hover {
     color: var(--default-error);
 }
@@ -95,7 +94,6 @@
     background-color: var(--default-text);
 }
 
-
 .hover\:bg-error:hover {
     background-color: var(--default-error);
 }
@@ -117,7 +115,8 @@
 
 .pointer {
     cursor: pointer;
-}body {
+}
+body {
     background-color: var(--default-bg);
     color: var(--default-sub);
     padding: 20px;
@@ -166,7 +165,6 @@
     border: 1px solid var(--default-text);
     background: var(--default-bg);
     color: var(--default-text);
-
 }
 
 .header-line {
@@ -180,7 +178,18 @@
     border: 0;
 }
 
-
 .bg-none {
     background: none;
+}
+
+input[type='range'] {
+    &::-webkit-slider-runnable-track {
+        background: var(--default-sub);
+        border-radius: 25px;
+    }
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 1px solid var(--default-sub);
+        background: var(--default-main);
+    }
 }
