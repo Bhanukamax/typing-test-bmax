@@ -191,3 +191,10 @@ input[type='range'] {
         background: var(--default-main);
     }
 }
+
+.user-error-word {
+    position: absolute;
+    top: 1.2em;
+    left: 0;
+    font-size: 0.5em;
+}
