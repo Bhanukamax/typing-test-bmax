@@ -50,7 +50,6 @@ export default function TypingTest({ wordCount }: Props) {
                 return acc;
             }, 0);
 
-        console.log('wrongLetterCount', wrongLetterCount);
         setWpm(
             Math.floor(
                 (userText.length - wrongLetterCount) / 5 / (testTime / 60000)
@@ -68,12 +67,13 @@ export default function TypingTest({ wordCount }: Props) {
 
     // set test time every milisecond
     useEffect(() => {
+        let interval: NodeJS.Timeout;
         if (testState === TestState.IN_PROGRESS) {
-            const interval = setInterval(() => {
+            interval = setInterval(() => {
                 setTestTime(Date.now() - startTime);
             }, 1);
-            return () => clearInterval(interval);
         }
+        return () => clearInterval(interval);
     }, [testState, startTime]);
 
     useEffect(() => {
