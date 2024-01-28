@@ -38,10 +38,10 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
             <p id="test-text-p">
                 {test.split('').map((letter: string, index: number) => {
                     let style;
-                    let correct = true;
+                    let hasError = false;
                     if (index < userText.length) {
-                        correct = letter !== userText[index];
-                        style = correct
+                        hasError = letter !== userText[index];
+                        style = hasError
                             ? {
                                   color: 'var(--default-error)',
                                   textDecoration: 'var(default-error-bg)',
@@ -62,6 +62,11 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
                             className={hasCursor ? 'cursor letter' : 'letter'}
                         >
                             {letter}
+                            {hasError && (
+                                <hint className="user-error-word">
+                                    {userText[index]}
+                                </hint>
+                            )}
                         </span>
                     );
                 })}
