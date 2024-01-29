@@ -1,15 +1,15 @@
 import { useEffect, useRef } from 'react';
-import { SettingsType } from '../util/settings';
+import { SettingsType, useSettings } from '../util/settings';
 
 interface Props {
     userText: string;
     test: string;
     onClick: () => void;
-    settings: SettingsType;
 }
 
 export default function TestDisplay({ test, userText, onClick }: Props) {
-    const currentLetterRef = useRef<HTMLSpanElement>(null);
+  const currentLetterRef = useRef<HTMLSpanElement>(null);
+    const { settings } = useSettings();
     // drow cursor on current letter
     useEffect(() => {
         if (currentLetterRef.current) {
@@ -64,7 +64,7 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
                             className={hasCursor ? 'cursor letter' : 'letter'}
                         >
                             {letter}
-                            {hasError && (
+                            {hasError && settings.showErrorsChars && (
                                 <span className="user-error-word">
                                     {userText[index]}
                                 </span>

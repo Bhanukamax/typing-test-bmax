@@ -182,7 +182,6 @@ export default function TypingTest({ wordCount }: Props) {
                 test={testWords.join(' ')}
                 userText={userText}
                 onClick={() => inputRef.current?.focus()}
-                settings={settings}
             />
             <input
                 id="user-input"
