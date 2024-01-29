@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { updateSetting, type SettingsType } from '../util/settings';
 import WordCuntInput from './word-count-input';
+import { ToggleSwitch } from 'flowbite-react';
 
 type Props = {
     onSave: () => void;
@@ -9,6 +10,9 @@ type Props = {
 
 export default function Settings({ onSave, settings }: Props) {
     const [wordCount, setWordCount] = useState<number>(settings.wordCount);
+    const [showErrorChars, setShowErrorChars] = useState<boolean>(
+        settings.showErrorsChars
+    );
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -16,17 +20,29 @@ export default function Settings({ onSave, settings }: Props) {
     };
 
     return (
-        <div className="color-sub flex just">
-            <form className="form" onSubmit={handleSubmit}>
+        <form className="form flex w-full items-center" onSubmit={handleSubmit}>
+            <div className="color-sub flex flex-col w-full items-center">
                 <h2 className="text-xl text-center">Settings</h2>
 
-                <WordCuntInput value={wordCount} onChange={setWordCount} />
+                <div className="flex flex-col gap-2 max-w-full w-60 ">
+                    <WordCuntInput value={wordCount} onChange={setWordCount} />
+
+                    <div className="flex justify-between">
+                        <label className="label color-text">Show error characters</label>
+                        <ToggleSwitch
+                            name="showErrorChars"
+                            color="main"
+                            checked={showErrorChars}
+                            onChange={setShowErrorChars}
+                        />
+                    </div>
+                </div>
                 <div className="flex justify-center">
                     <button className="button mt-5 rounded-full" type="submit">
                         Save
                     </button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     );
 }
