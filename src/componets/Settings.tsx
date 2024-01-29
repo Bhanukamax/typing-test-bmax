@@ -1,6 +1,6 @@
-import { Label, RangeSlider, TextInput } from 'flowbite-react';
-import { ChangeEvent, useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { updateSetting, type SettingsType } from '../util/settings';
+import WordCuntInput from './word-count-input';
 
 type Props = {
     onSave: () => void;
@@ -9,13 +9,6 @@ type Props = {
 
 export default function Settings({ onSave, settings }: Props) {
     const [wordCount, setWordCount] = useState<number>(settings.wordCount);
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    const handleWordCountChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e?.target?.value;
-        if (isNaN(Number(e?.target?.value))) return;
-        setWordCount(Number(e?.target?.value) || wordCount);
-    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -23,36 +16,12 @@ export default function Settings({ onSave, settings }: Props) {
         onSave();
     };
 
-    const handleClick = () => {
-        inputRef.current?.select();
-    };
     return (
         <div className="color-sub flex just">
             <form className="form" onSubmit={handleSubmit}>
                 <h2 className="text-xl text-center">Settings</h2>
 
-                <Label htmlFor="wordCount" className="color-text">
-                    Word count:
-                </Label>
-                <input
-                    onClick={handleClick}
-                    ref={inputRef}
-                    className="color-main bg-bg border-0 pl-2"
-                    id="wordCount"
-                    min={1}
-                    max={1000}
-                    value={wordCount}
-                    onChange={handleWordCountChange}
-                />
-                <RangeSlider
-                  className="word-count-slider"
-                    id="wordCount"
-                    min={1}
-                    max={50}
-                    value={wordCount}
-                    onChange={handleWordCountChange}
-                />
-
+                <WordCuntInput value={wordCount} onChange={setWordCount} />
                 <div className="flex justify-center">
                     <button className="button mt-5 rounded-full" type="submit">
                         Save
