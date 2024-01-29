@@ -1,24 +1,26 @@
-import { load, save } from "./storage"
+import { load, save } from './storage';
 
 export type SettingsType = {
- wordCount: number
-}
+    wordCount: number;
+    showErrorsChars: boolean;
+};
 
 const defaultSettings: SettingsType = {
-  wordCount: 10
-}
+    wordCount: 10,
+    showErrorsChars: false,
+};
 
 export function loadSettings(): SettingsType {
-  return load("settings") || defaultSettings
+    return load('settings') || defaultSettings;
 }
 
-
 export function saveSettings(settings: SettingsType) {
-  save("settings", settings)
+    save('settings', settings);
 }
 
 export function updateSetting(key: keyof SettingsType, value: any) {
-    const settings = loadSettings()
-    settings[key] = value
-    saveSettings(settings)
+    const settings = loadSettings();
+    //  @ts-ignore
+    settings[key] = value;
+    saveSettings(settings);
 }
