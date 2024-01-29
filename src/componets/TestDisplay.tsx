@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function TestDisplay({ test, userText, onClick }: Props) {
-  const currentLetterRef = useRef<HTMLSpanElement>(null);
+    const currentLetterRef = useRef<HTMLSpanElement>(null);
     const { settings } = useSettings();
     // drow cursor on current letter
     useEffect(() => {
@@ -34,9 +34,6 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
 
     return (
         <div onClick={() => onClick()} className="text-display my-4 text-3xl">
-            <div id="cursor" className="text-cursor text-3xl">
-                &nbsp;
-            </div>
             <p id="test-text-p">
                 {test.split('').map((letter: string, index: number) => {
                     let style;
@@ -74,6 +71,9 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
                 })}
                 <span>&nbsp; &nbsp; &nbsp;</span>
             </p>
+            <div id="cursor" className="text-cursor text-3xl">
+                &nbsp;
+            </div>
         </div>
     );
 }
