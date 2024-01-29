@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { SettingsType, useSettings } from '../util/settings';
+import { useSettings } from '../util/settings';
 
 interface Props {
     userText: string;

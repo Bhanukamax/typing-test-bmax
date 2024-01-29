@@ -30,7 +30,7 @@ function App() {
                 <div className="header-line flex flex-col">
                     <h1 className="text-4xl font-bold">Typing Test</h1>
                     <button
-                        className="border-0 flex bg-none color-sub hover:color-main pointer item-center"
+                        className="border-0 flex bg-none color-sub hover:color-main pointer items-center"
                         onClick={() =>
                             setScreen(
                                 screen === AppScreen.TEST
