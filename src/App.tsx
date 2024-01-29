@@ -3,7 +3,7 @@ import { IoCog, IoArrowBack } from 'react-icons/io5';
 import './App.scss';
 import Settings from './componets/Settings';
 import TypingTest from './componets/TypingTest';
-import { loadSettings } from './util/settings';
+import { loadSettings, SettingsType, useSettings } from './util/settings';
 
 const TEST_SIZE = 10;
 
@@ -12,20 +12,21 @@ enum AppScreen {
     SETTINGS,
 }
 
-const initialScreen = AppScreen.TEST;
-//const initialScreen = AppScreen.SETTINGS;
+//const initialScreen = AppScreen.TEST;
+const initialScreen = AppScreen.SETTINGS;
 
 function App() {
     const [screen, setScreen] = useState(initialScreen);
-    const [settings, setSettings] = useState(loadSettings());
+    //    const [settings, setSettings] = useState(loadSettings());
+    const { settings, saveSettings } = useSettings();
     useEffect(() => {
-        const settings = loadSettings();
-        setSettings(settings);
+        //const settings = loadSettings();
+        //setSettings(settings);
     }, []);
 
-    const onSave = () => {
-        const settings = loadSettings();
-        setSettings(settings);
+    const onSave = (settings: SettingsType) => {
+        console.log('settings', settings);
+        saveSettings(settings);
         setScreen(AppScreen.TEST);
     };
 
