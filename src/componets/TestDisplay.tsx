@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react';
+import { SettingsType } from '../util/settings';
 
 interface Props {
     userText: string;
     test: string;
     onClick: () => void;
+    settings: SettingsType;
 }
 
 export default function TestDisplay({ test, userText, onClick }: Props) {
@@ -63,18 +65,15 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
                         >
                             {letter}
                             {hasError && (
-                                <hint className="user-error-word">
+                                <span className="user-error-word">
                                     {userText[index]}
-                                </hint>
+                                </span>
                             )}
                         </span>
                     );
                 })}
                 <span>&nbsp; &nbsp; &nbsp;</span>
             </p>
-
-            {/* <h3>{userText}</h3>
-            <h3>{test}</h3> */}
         </div>
     );
 }
