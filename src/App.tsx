@@ -12,20 +12,14 @@ enum AppScreen {
     SETTINGS,
 }
 
-//const initialScreen = AppScreen.TEST;
-const initialScreen = AppScreen.SETTINGS;
+const initialScreen = AppScreen.TEST;
+//const initialScreen = AppScreen.SETTINGS;
 
 function App() {
     const [screen, setScreen] = useState(initialScreen);
-    //    const [settings, setSettings] = useState(loadSettings());
     const { settings, saveSettings } = useSettings();
-    useEffect(() => {
-        //const settings = loadSettings();
-        //setSettings(settings);
-    }, []);
 
     const onSave = (settings: SettingsType) => {
-        console.log('settings', settings);
         saveSettings(settings);
         setScreen(AppScreen.TEST);
     };
