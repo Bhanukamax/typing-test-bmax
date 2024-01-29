@@ -40,14 +40,22 @@ export const SettingsContext = createContext<{
 export function useSettings() {
     const [settings, setSettings] = useState(loadSettings());
 
-    const updateSetting = useCallback(
-        (key: keyof SettingsType, value: any) => {
-            const newSettings = { ...settings, [key]: value };
-            setSettings(newSettings);
-            saveSettings(newSettings);
+    const save = useCallback(
+        (settings: SettingsType) => {
+            saveSettings(settings);
+            setSettings(settings);
         },
         [settings]
     );
 
-    return { settings, updateSetting, saveSettings };
+    const updateSetting = useCallback(
+        (key: keyof SettingsType, value: any) => {
+            const newSettings = { ...settings, [key]: value };
+            saveSettings(newSettings);
+            setSettings(newSettings);
+        },
+        [settings]
+    );
+
+    return { settings, updateSetting, saveSettings: save };
 }
