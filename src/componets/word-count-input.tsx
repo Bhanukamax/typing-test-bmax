@@ -1,5 +1,5 @@
 import { Label, RangeSlider } from 'flowbite-react';
-import { useRef } from 'react';
+import { ChangeEvent, useRef } from 'react';
 
 type Props = {
     value: number;
@@ -10,7 +10,7 @@ export default function WordCuntInput({ value, onChange }: Props) {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleWordCountChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e?.target?.value;
+        const val = e?.target?.value;
         if (isNaN(Number(e?.target?.value))) return;
         onChange(Number(e?.target?.value) || value);
     };
