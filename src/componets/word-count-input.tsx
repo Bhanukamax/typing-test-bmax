@@ -20,20 +20,22 @@ export default function WordCuntInput({ value, onChange }: Props) {
     };
 
     return (
-        <>
-            <Label htmlFor="wordCount" className="color-text">
+      <>
+          <div className="flex justify-between">
+            <Label htmlFor="wordCount" className="color-text grow shrink-0">
                 Word count:
             </Label>
             <input
                 onClick={handleClick}
                 ref={inputRef}
-                className="color-main bg-bg border-0 pl-2"
+                className="color-main bg-bg pl-2 shrink grow-0 w-10"
                 id="wordCount"
                 min={1}
                 max={1000}
                 value={value}
                 onChange={handleWordCountChange}
             />
+          </div>
             <RangeSlider
                 className="word-count-slider"
                 id="wordCount"
