@@ -4,7 +4,7 @@ import { IoReloadCircle, IoCog } from 'react-icons/io5';
 import { useEffect, useState, useRef } from 'react';
 import { setTheme, Themes } from '../util/theme';
 import { useFocusRefOnBodyClick } from '../hooks';
-import { Button } from 'flowbite-react';
+import { useSettings } from '../util/settings';
 
 enum TestState {
     NOT_STARTED,
@@ -28,6 +28,7 @@ type Props = {
 };
 
 export default function TypingTest({ wordCount }: Props) {
+    const {settings} = useSettings()
     const [testState, setTestState] = useState<TestState>(
         TestState.NOT_STARTED
     );
@@ -180,7 +181,8 @@ export default function TypingTest({ wordCount }: Props) {
             <TestDisplay
                 test={testWords.join(' ')}
                 userText={userText}
-                onClick={() => inputRef.current?.focus()}
+              onClick={() => inputRef.current?.focus()}
+              settings={settings}
             />
             <input
                 id="user-input"

@@ -1,11 +1,12 @@
 import { load, save } from './storage';
+import { createContext, useCallback, useState } from 'react';
 
 export type SettingsType = {
     wordCount: number;
     showErrorsChars: boolean;
 };
 
-const defaultSettings: SettingsType = {
+export const defaultSettings: SettingsType = {
     wordCount: 10,
     showErrorsChars: false,
 };
@@ -23,4 +24,27 @@ export function updateSetting(key: keyof SettingsType, value: any) {
     //  @ts-ignore
     settings[key] = value;
     saveSettings(settings);
+}
+
+export const SettingsContext = createContext<{
+    settings: SettingsType;
+    updateSetting: (key: keyof SettingsType, value: any) => void;
+}>({
+    settings: defaultSettings,
+    updateSetting: updateSetting,
+});
+
+export function useSettings() {
+    const [settings, setSettings] = useState(loadSettings());
+
+    const updateSetting = useCallback(
+        (key: keyof SettingsType, value: any) => {
+            const newSettings = { ...settings, [key]: value };
+            setSettings(newSettings);
+            saveSettings(newSettings);
+        },
+        [settings]
+    );
+
+    return { settings, updateSetting };
 }
