@@ -28,7 +28,7 @@ type Props = {
 };
 
 export default function TypingTest({ wordCount }: Props) {
-    const {settings} = useSettings()
+    const { settings } = useSettings();
     const [testState, setTestState] = useState<TestState>(
         TestState.NOT_STARTED
     );
@@ -181,8 +181,8 @@ export default function TypingTest({ wordCount }: Props) {
             <TestDisplay
                 test={testWords.join(' ')}
                 userText={userText}
-              onClick={() => inputRef.current?.focus()}
-              settings={settings}
+                onClick={() => inputRef.current?.focus()}
+                settings={settings}
             />
             <input
                 id="user-input"

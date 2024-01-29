@@ -12,7 +12,6 @@ export default function Settings({ onSave, settings }: Props) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        updateSetting('wordCount', wordCount);
         onSave();
     };
 
