@@ -8,11 +8,12 @@ export type SettingsType = {
 
 export const defaultSettings: SettingsType = {
     wordCount: 10,
-    showErrorsChars: false,
+    showErrorsChars: true,
 };
 
 export function loadSettings(): SettingsType {
-    return load('settings') || defaultSettings;
+    const settings = load('settings') || defaultSettings;
+    return { ...defaultSettings, ...settings };
 }
 
 export function saveSettings(settings: SettingsType) {
@@ -29,9 +30,11 @@ export function updateSetting(key: keyof SettingsType, value: any) {
 export const SettingsContext = createContext<{
     settings: SettingsType;
     updateSetting: (key: keyof SettingsType, value: any) => void;
+    saveSettings: (settings: SettingsType) => void;
 }>({
     settings: defaultSettings,
     updateSetting: updateSetting,
+    saveSettings: saveSettings,
 });
 
 export function useSettings() {
@@ -46,5 +49,5 @@ export function useSettings() {
         [settings]
     );
 
-    return { settings, updateSetting };
+    return { settings, updateSetting, saveSettings };
 }

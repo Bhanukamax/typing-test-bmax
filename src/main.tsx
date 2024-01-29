@@ -6,24 +6,24 @@ import {
     SettingsContext,
     defaultSettings,
     updateSetting,
+    saveSettings,
 } from './util/settings';
 
 import type { CustomFlowbiteTheme } from 'flowbite-react';
 import { Flowbite } from 'flowbite-react';
 
 const customTheme: CustomFlowbiteTheme = {
-  toggleSwitch: {
-    toggle: {
-      checked: {
-        color:{
-          main: "bg-main",
+    toggleSwitch: {
+        toggle: {
+            checked: {
+                color: {
+                    main: 'bg-main',
+                },
+                off: 'bg-sub',
+            },
         },
-        off: "bg-sub",
-      },
     },
-  },
 };
-
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -31,12 +31,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             value={{
                 settings: defaultSettings,
                 updateSetting: updateSetting,
+                saveSettings: saveSettings,
             }}
         >
-
-    <Flowbite theme={{ theme: customTheme }}>
-        <App />
-    </Flowbite>
+            <Flowbite theme={{ theme: customTheme }}>
+                <App />
+            </Flowbite>
         </SettingsContext.Provider>
     </React.StrictMode>
 );

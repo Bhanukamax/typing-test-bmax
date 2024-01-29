@@ -4,7 +4,7 @@ import WordCuntInput from './word-count-input';
 import { ToggleSwitch } from 'flowbite-react';
 
 type Props = {
-    onSave: () => void;
+    onSave: (settings: SettingsType) => void;
     settings: SettingsType;
 };
 
@@ -16,7 +16,7 @@ export default function Settings({ onSave, settings }: Props) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onSave();
+        onSave({ wordCount, showErrorsChars: showErrorChars });
     };
 
     return (
