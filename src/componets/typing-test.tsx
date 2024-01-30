@@ -221,10 +221,6 @@ export default function TypingTest({ wordCount }: Props) {
                 <span>Time: {formatTime(testTime)}</span>
                 <span>index: {currentWordIndex}</span>
             </div>
-            <p>testWords[currentWordIndex] : {testWords[currentWordIndex]}</p>
-            <p>matched : {matchedUserText}</p>
-            <p>test state: {stateToString(testState)}</p>
-            <p> {matchedUserText + userText}</p>
             <TestDisplay
                 test={testWords.join(' ')}
                 userText={
@@ -247,7 +243,7 @@ export default function TypingTest({ wordCount }: Props) {
                 onChange={(e) => setUserText(e.target.value)}
                 onBlur={handleOnBlur}
               autoCapitalize="off"
-              autoComplete='off'
+                autoComplete='off'
             />
             <button onClick={newTest} className="button rounded-full">
                 New Test &nbsp; <IoReloadCircle size={20} />{' '}
