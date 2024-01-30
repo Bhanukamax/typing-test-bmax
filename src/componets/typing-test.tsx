@@ -57,7 +57,7 @@ export default function TypingTest({ wordCount }: Props) {
     const [currentWordIndex, setCurrentWordIndex] = useState<number>(0); // New state variable
 
     function updateWpm() {
-        const newUserText = matchedUserText + " " +  userText;
+        const newUserText = matchedUserText + ' ' + userText;
         const wrongLetterCount = userText
             .split('')
             .reduce((acc, cur, index) => {
@@ -192,9 +192,9 @@ export default function TypingTest({ wordCount }: Props) {
         setUserText('');
         testTextInputRef.current?.focus();
         setTestState(TestState.NOT_STARTED);
-      setTestTime(0);
-      setMatchedUserText('');
-      setCurrentWordIndex(0);
+        setTestTime(0);
+        setMatchedUserText('');
+        setCurrentWordIndex(0);
     };
 
     useEffect(() => {
@@ -242,8 +242,8 @@ export default function TypingTest({ wordCount }: Props) {
                 value={userText}
                 onChange={(e) => setUserText(e.target.value)}
                 onBlur={handleOnBlur}
-              autoCapitalize="off"
-                autoComplete='off'
+                autoCapitalize="off"
+                autoComplete="off"
             />
             <button onClick={newTest} className="button rounded-full">
                 New Test &nbsp; <IoReloadCircle size={20} />{' '}
