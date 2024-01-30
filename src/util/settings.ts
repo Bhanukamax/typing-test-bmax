@@ -3,13 +3,13 @@ import { createContext, useCallback, useState } from 'react';
 
 export type SettingsType = {
     wordCount: number;
-    showErrorsChars: boolean;
+    showErrorChars: boolean;
     showInput: boolean;
 };
 
 export const defaultSettings: SettingsType = {
     wordCount: 10,
-    showErrorsChars: true,
+    showErrorChars: true,
     showInput: false,
 };
 
