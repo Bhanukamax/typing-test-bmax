@@ -12,6 +12,19 @@ enum TestState {
     FINISHED,
 }
 
+function stateToString(state: TestState) {
+    switch (state) {
+        case TestState.FINISHED:
+            return 'FINISHED';
+        case TestState.IN_PROGRESS:
+            return 'IN PROGRESS';
+        case TestState.NOT_STARTED:
+            return 'NOT STARTED';
+        default:
+            return 'UNKWON';
+    }
+}
+
 function formatTime(time: number) {
     const minutes = Math.floor(time / 60000);
     const seconds = Math.floor((time % 60000) / 1000);
@@ -40,8 +53,11 @@ export default function TypingTest({ wordCount }: Props) {
     const [wpm, setWpm] = useState<number>(0);
     const [testSize, setTestSize] = useState<number>(wordCount);
     const [practiceQue, setPracticeQue] = useState<string[]>([]);
+    const [matchedUserText, setMatchedUserText] = useState<string>('');
+    const [currentWordIndex, setCurrentWordIndex] = useState<number>(0); // New state variable
 
     function updateWpm() {
+        const newUserText = matchedUserText + " " +  userText;
         const wrongLetterCount = userText
             .split('')
             .reduce((acc, cur, index) => {
@@ -53,10 +69,23 @@ export default function TypingTest({ wordCount }: Props) {
 
         setWpm(
             Math.floor(
-                (userText.length - wrongLetterCount) / 5 / (testTime / 60000)
+                (newUserText.length - wrongLetterCount) / 5 / (testTime / 60000)
             )
         );
     }
+
+    useEffect(() => {
+        if (testState === TestState.IN_PROGRESS) {
+            if (userText === testWords[currentWordIndex] + ' ') {
+                setUserText('');
+                setCurrentWordIndex(currentWordIndex + 1);
+                setMatchedUserText(
+                    (matchedUserText ? matchedUserText + ' ' : '') +
+                        testWords[currentWordIndex]
+                );
+            }
+        }
+    }, [userText]);
 
     // test start effect, start test on first keypress
     useEffect(() => {
@@ -131,14 +160,16 @@ export default function TypingTest({ wordCount }: Props) {
 
     // end test effect
     useEffect(() => {
+        const newUserText = matchedUserText + ' ' + userText;
         if (
             (testState === TestState.IN_PROGRESS &&
-                userText === testWords.join(' ')) ||
-            userText.length >= testWords.join(' ').length
+                newUserText === testWords.join(' ')) ||
+            newUserText.length >= testWords.join(' ').length
         ) {
             setTestState(TestState.FINISHED);
+            //          setMatchedUserText("");
         }
-    }, [userText, testWords, testState]);
+    }, [userText, testWords, testState, matchedUserText]);
 
     // wpm effect
     useEffect(() => {
@@ -157,10 +188,13 @@ export default function TypingTest({ wordCount }: Props) {
         );
         const practiceWords = addPracticeWordsToTest(testWords, practiceQue, 4);
         setTestWords(practiceWords);
+
         setUserText('');
         testTextInputRef.current?.focus();
         setTestState(TestState.NOT_STARTED);
-        setTestTime(0);
+      setTestTime(0);
+      setMatchedUserText('');
+      setCurrentWordIndex(0);
     };
 
     useEffect(() => {
@@ -185,10 +219,17 @@ export default function TypingTest({ wordCount }: Props) {
             <div className="stats color-main text-xl">
                 <span>WPM: {wpm}</span>
                 <span>Time: {formatTime(testTime)}</span>
+                <span>index: {currentWordIndex}</span>
             </div>
+            <p>testWords[currentWordIndex] : {testWords[currentWordIndex]}</p>
+            <p>matched : {matchedUserText}</p>
+            <p>test state: {stateToString(testState)}</p>
+            <p> {matchedUserText + userText}</p>
             <TestDisplay
                 test={testWords.join(' ')}
-                userText={userText}
+                userText={
+                    (matchedUserText ? matchedUserText + ' ' : '') + userText
+                }
                 onClick={() => testTextInputRef.current?.focus()}
             />
             <input
@@ -205,7 +246,8 @@ export default function TypingTest({ wordCount }: Props) {
                 value={userText}
                 onChange={(e) => setUserText(e.target.value)}
                 onBlur={handleOnBlur}
-                autoCapitalize="off"
+              autoCapitalize="off"
+              autoComplete='off'
             />
             <button onClick={newTest} className="button rounded-full">
                 New Test &nbsp; <IoReloadCircle size={20} />{' '}
