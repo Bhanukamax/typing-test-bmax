@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IoCog, IoArrowBack } from 'react-icons/io5';
 import './App.scss';
-import Settings from './componets/Settings';
-import TypingTest from './componets/TypingTest';
-import { loadSettings, SettingsType, useSettings } from './util/settings';
-
-const TEST_SIZE = 10;
+import Settings from './componets/settings';
+import TypingTest from './componets/typing-test';
+import { SettingsType, useSettings } from './util/settings';
 
 enum AppScreen {
     TEST,

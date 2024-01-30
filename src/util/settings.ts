@@ -4,11 +4,13 @@ import { createContext, useCallback, useState } from 'react';
 export type SettingsType = {
     wordCount: number;
     showErrorsChars: boolean;
+    showInput: boolean;
 };
 
 export const defaultSettings: SettingsType = {
     wordCount: 10,
     showErrorsChars: true,
+    showInput: false,
 };
 
 export function loadSettings(): SettingsType {
