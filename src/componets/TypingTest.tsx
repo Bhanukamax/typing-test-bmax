@@ -147,9 +147,9 @@ export default function TypingTest({ wordCount }: Props) {
         }
     }, [userText, testTime, testState]);
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const testTextInputRef = useRef<HTMLInputElement>(null);
 
-    useFocusRefOnBodyClick(inputRef);
+    useFocusRefOnBodyClick(testTextInputRef);
 
     const newTest = () => {
         const testWords = getWeightedRandomSample(pool, testSize).map((word) =>
@@ -158,7 +158,7 @@ export default function TypingTest({ wordCount }: Props) {
         const practiceWords = addPracticeWordsToTest(testWords, practiceQue, 4);
         setTestWords(practiceWords);
         setUserText('');
-        inputRef.current?.focus();
+        testTextInputRef.current?.focus();
         setTestState(TestState.NOT_STARTED);
         setTestTime(0);
     };
@@ -168,8 +168,13 @@ export default function TypingTest({ wordCount }: Props) {
     }, []);
 
     const handleOnBlur = () => {
+        return;
         setTestState(TestState.FINISHED);
         updateWpm();
+    };
+
+    const handleOnFocus = () => {
+        testTextInputRef.current?.setSelectionRange(-1, -1);
     };
 
     return (
@@ -181,12 +186,13 @@ export default function TypingTest({ wordCount }: Props) {
             <TestDisplay
                 test={testWords.join(' ')}
                 userText={userText}
-                onClick={() => inputRef.current?.focus()}
+                onClick={() => testTextInputRef.current?.focus()}
             />
             <input
                 id="user-input"
-                ref={inputRef}
+                ref={testTextInputRef}
                 disabled={testState === TestState.FINISHED}
+                onFocus={handleOnFocus}
                 type="text"
                 value={userText}
                 onChange={(e) => setUserText(e.target.value)}
