@@ -1,6 +1,6 @@
-import TestDisplay from './TestDisplay';
+import TestDisplay from './test-display';
 import text from '../1000-common.txt';
-import { IoReloadCircle, IoCog } from 'react-icons/io5';
+import { IoReloadCircle } from 'react-icons/io5';
 import { useEffect, useState, useRef } from 'react';
 import { setTheme, Themes } from '../util/theme';
 import { useFocusRefOnBodyClick } from '../hooks';
@@ -177,6 +177,9 @@ export default function TypingTest({ wordCount }: Props) {
         testTextInputRef.current?.setSelectionRange(-1, -1);
     };
 
+    const defaultInputClasses = 'top-0 right-0 opacity-0 fixed size-0';
+    const visibleInputClasses = 'border-0 rounded-full color-sub mb-4';
+
     return (
         <>
             <div className="stats color-main text-xl">
@@ -190,6 +193,11 @@ export default function TypingTest({ wordCount }: Props) {
             />
             <input
                 id="user-input"
+                className={
+                    settings.showInput
+                        ? visibleInputClasses
+                        : defaultInputClasses
+                }
                 ref={testTextInputRef}
                 disabled={testState === TestState.FINISHED}
                 onFocus={handleOnFocus}
