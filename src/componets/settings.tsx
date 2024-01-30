@@ -11,12 +11,15 @@ type Props = {
 export default function Settings({ onSave, settings }: Props) {
     const [wordCount, setWordCount] = useState<number>(settings.wordCount);
     const [showErrorChars, setShowErrorChars] = useState<boolean>(
-        settings.showErrorsChars
+        Boolean(settings.showErrorChars)
+    );
+    const [showInput, setShowInput] = useState<boolean>(
+        Boolean(settings.showInput)
     );
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onSave({ wordCount, showErrorsChars: showErrorChars });
+        onSave({ wordCount, showInput, showErrorChars });
     };
 
     return (
@@ -28,12 +31,25 @@ export default function Settings({ onSave, settings }: Props) {
                     <WordCuntInput value={wordCount} onChange={setWordCount} />
 
                     <div className="flex justify-between">
-                        <label className="label color-text">Show error characters</label>
+                        <label className="label color-text">
+                            Show error characters
+                        </label>
                         <ToggleSwitch
                             name="showErrorChars"
                             color="main"
                             checked={showErrorChars}
                             onChange={setShowErrorChars}
+                        />
+                    </div>
+                    <div className="flex justify-between">
+                        <label className="label color-text">
+                            Show input field
+                        </label>
+                        <ToggleSwitch
+                            name="showInput"
+                            color="main"
+                            checked={showInput}
+                            onChange={setShowInput}
                         />
                     </div>
                 </div>

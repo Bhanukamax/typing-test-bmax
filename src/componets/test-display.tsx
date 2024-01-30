@@ -61,7 +61,7 @@ export default function TestDisplay({ test, userText, onClick }: Props) {
                             className={hasCursor ? 'cursor letter' : 'letter'}
                         >
                             {letter}
-                            {hasError && settings.showErrorsChars && (
+                            {hasError && settings.showErrorChars && (
                                 <span className="user-error-word">
                                     {userText[index]}
                                 </span>
