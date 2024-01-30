@@ -219,7 +219,6 @@ export default function TypingTest({ wordCount }: Props) {
             <div className="stats color-main text-xl">
                 <span>WPM: {wpm}</span>
                 <span>Time: {formatTime(testTime)}</span>
-                <span>index: {currentWordIndex}</span>
             </div>
             <TestDisplay
                 test={testWords.join(' ')}
