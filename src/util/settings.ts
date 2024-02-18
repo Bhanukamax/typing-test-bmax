@@ -6,6 +6,7 @@ export type SettingsType = {
     showErrorChars: boolean;
     showInput: boolean;
     autoNext: boolean;
+    tabToNext: boolean;
 };
 
 export const defaultSettings: SettingsType = {
@@ -13,6 +14,7 @@ export const defaultSettings: SettingsType = {
     showErrorChars: true,
     showInput: false,
     autoNext: false,
+    tabToNext: false,
 };
 
 export function loadSettings(): SettingsType {

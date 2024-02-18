@@ -1,7 +1,7 @@
 import TestDisplay from './test-display';
 import text from '../1000-common.txt';
 import { IoReloadCircle } from 'react-icons/io5';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { setTheme, Themes } from '../util/theme';
 import { useFocusRefOnBodyClick } from '../hooks';
 import { useSettings } from '../util/settings';
@@ -182,6 +182,7 @@ export default function TypingTest({ wordCount }: Props) {
     }, [userText, testTime, testState]);
 
     const testTextInputRef = useRef<HTMLInputElement>(null);
+    const newTestButtonRef = useRef<HTMLButtonElement>(null);
 
     useFocusRefOnBodyClick(testTextInputRef);
 
@@ -203,6 +204,25 @@ export default function TypingTest({ wordCount }: Props) {
     useEffect(() => {
         newTest();
     }, []);
+
+    // new test on button focus
+    useLayoutEffect(() => {
+        // DISABLED: as not properly working
+        return;
+        if (!settings.tabToNext) {
+            return;
+        }
+        const listener = () => {
+            setTimeout(() => {
+                newTest();
+            }, 100);
+
+        };
+        newTestButtonRef.current?.addEventListener('focus', listener)
+        return () => {
+            newTestButtonRef.current?.removeEventListener('focus', listener)
+        }
+    }, [newTestButtonRef.current === document.activeElement]);
 
     const handleOnBlur = () => {
         return;
@@ -247,7 +267,7 @@ export default function TypingTest({ wordCount }: Props) {
                 autoCapitalize="off"
                 autoComplete="off"
             />
-            <button onClick={newTest} className="button rounded-full">
+            <button ref={newTestButtonRef} onClick={newTest} className="button rounded-full">
                 New Test &nbsp; <IoReloadCircle size={20} />{' '}
             </button>
         </>
