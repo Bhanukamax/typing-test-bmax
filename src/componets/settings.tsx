@@ -19,10 +19,14 @@ export default function Settings({ onSave, settings }: Props) {
     const [showInput, setShowInput] = useState<boolean>(
         Boolean(settings.showInput)
     );
+    const [tabToNext, setTabToNext] = useState<boolean>(
+        Boolean(settings.tabToNext)
+    );
+
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onSave({ wordCount, showInput, showErrorChars, autoNext });
+        onSave({ wordCount, showInput, showErrorChars, autoNext, tabToNext: tabToNext });
     };
 
     return (
@@ -30,11 +34,12 @@ export default function Settings({ onSave, settings }: Props) {
             <div className="color-sub flex flex-col w-full items-center">
                 <h2 className="text-xl text-center">Settings</h2>
 
-                <div className="flex flex-col gap-2 max-w-full w-60 ">
+                <div className="flex flex-col gap-2 max-w-full w-2/6 min-w-64">
                     <WordCuntInput value={wordCount} onChange={setWordCount} />
                     <BoolSetting value={showErrorChars} setValue={setShowErrorChars} title='Show error characters' />
                     <BoolSetting value={showInput} setValue={setShowInput} title='Show input field' />
-                    <BoolSetting value={autoNext} setValue={setAutoNext} title='Auto next' />
+                    <BoolSetting value={autoNext} setValue={setAutoNext} title='Auto next on end' />
+                    {/* <BoolSetting value={tabToNext} setValue={setTabToNext} title='Tab to next test (experimental)' /> */}
                 </div>
                 <div className="flex justify-center">
                     <button className="button mt-5 rounded-full" type="submit">
@@ -59,7 +64,6 @@ function BoolSetting({
         <div className="flex justify-between">
             <label className="label color-text">{title}</label>
             <ToggleSwitch
-                name="showInput"
                 color="main"
                 checked={value}
                 onChange={setValue}
