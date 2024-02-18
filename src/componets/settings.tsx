@@ -10,6 +10,9 @@ type Props = {
 
 export default function Settings({ onSave, settings }: Props) {
     const [wordCount, setWordCount] = useState<number>(settings.wordCount);
+    const [autoNext, setAutoNext] = useState<boolean>(
+        Boolean(settings.autoNext)
+    );
     const [showErrorChars, setShowErrorChars] = useState<boolean>(
         Boolean(settings.showErrorChars)
     );
@@ -19,7 +22,7 @@ export default function Settings({ onSave, settings }: Props) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onSave({ wordCount, showInput, showErrorChars });
+        onSave({ wordCount, showInput, showErrorChars, autoNext });
     };
 
     return (
@@ -29,29 +32,9 @@ export default function Settings({ onSave, settings }: Props) {
 
                 <div className="flex flex-col gap-2 max-w-full w-60 ">
                     <WordCuntInput value={wordCount} onChange={setWordCount} />
-
-                    <div className="flex justify-between">
-                        <label className="label color-text">
-                            Show error characters
-                        </label>
-                        <ToggleSwitch
-                            name="showErrorChars"
-                            color="main"
-                            checked={showErrorChars}
-                            onChange={setShowErrorChars}
-                        />
-                    </div>
-                    <div className="flex justify-between">
-                        <label className="label color-text">
-                            Show input field
-                        </label>
-                        <ToggleSwitch
-                            name="showInput"
-                            color="main"
-                            checked={showInput}
-                            onChange={setShowInput}
-                        />
-                    </div>
+                    <BoolSetting value={showErrorChars} setValue={setShowErrorChars} title='Show error characters' />
+                    <BoolSetting value={showInput} setValue={setShowInput} title='Show input field' />
+                    <BoolSetting value={autoNext} setValue={setAutoNext} title='Auto next' />
                 </div>
                 <div className="flex justify-center">
                     <button className="button mt-5 rounded-full" type="submit">
@@ -60,5 +43,27 @@ export default function Settings({ onSave, settings }: Props) {
                 </div>
             </div>
         </form>
+    );
+}
+
+function BoolSetting({
+    value,
+    setValue,
+    title,
+}: {
+    value: boolean;
+    setValue: (value: boolean) => void;
+    title: string;
+}) {
+    return (
+        <div className="flex justify-between">
+            <label className="label color-text">{title}</label>
+            <ToggleSwitch
+                name="showInput"
+                color="main"
+                checked={value}
+                onChange={setValue}
+            />
+        </div>
     );
 }

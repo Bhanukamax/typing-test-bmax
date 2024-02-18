@@ -168,8 +168,11 @@ export default function TypingTest({ wordCount }: Props) {
         ) {
             setTestState(TestState.FINISHED);
             //          setMatchedUserText("");
+            if (settings.autoNext) {
+                newTest();
+            }
         }
-    }, [userText, testWords, testState, matchedUserText]);
+    }, [userText, testWords, testState, matchedUserText, settings.autoNext]);
 
     // wpm effect
     useEffect(() => {
