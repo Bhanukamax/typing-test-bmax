@@ -5,12 +5,14 @@ export type SettingsType = {
     wordCount: number;
     showErrorChars: boolean;
     showInput: boolean;
+    autoNext: boolean;
 };
 
 export const defaultSettings: SettingsType = {
     wordCount: 10,
     showErrorChars: true,
     showInput: false,
+    autoNext: false,
 };
 
 export function loadSettings(): SettingsType {
