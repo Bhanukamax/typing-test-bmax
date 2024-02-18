@@ -38,7 +38,7 @@ export default function Settings({ onSave, settings }: Props) {
                     <WordCuntInput value={wordCount} onChange={setWordCount} />
                     <BoolSetting value={showErrorChars} setValue={setShowErrorChars} title='Show error characters' />
                     <BoolSetting value={showInput} setValue={setShowInput} title='Show input field' />
-                    <BoolSetting value={autoNext} setValue={setAutoNext} title='Auto next on end' />
+                    <BoolSetting value={autoNext} setValue={setAutoNext} title='Auto start next test on end' />
                     {/* <BoolSetting value={tabToNext} setValue={setTabToNext} title='Tab to next test (experimental)' /> */}
                 </div>
                 <div className="flex justify-center">
